@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MoviesTabTab.Models.Booking>
+
+@{
+    ViewBag.Title = "MyBookings";
+}
+
+<h2>MyBookings</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Screening.Movie.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Screening.ShowTime)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.Screening.Hall.HallName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfTickets)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Screening.Movie.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Screening.ShowTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Screening.Hall.HallName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfTickets)
+        </td>        
+    </tr>
+}
+
+</table>

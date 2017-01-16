@@ -1,0 +1,44 @@
+﻿@model List<MoviesTabTab.Models.Movie>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="carousel-three-popular" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-three-popular" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-three-popular" data-slide-to="1"></li>
+        <li data-target="#carousel-three-popular" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <a href="@Url.Action("Details", "Movies", new { id = Model[0].MovieId})"><img src="@Model[0].BackdropPath" alt="@Model[0].Title"></a>
+            <div class="carousel-caption">
+                <h3>@Model[0].Tagline</h3>
+            </div>
+        </div>
+        <div class="item">
+            <a href="@Url.Action("Details", "Movies", new { id = Model[1].MovieId})"><img src="@Model[1].BackdropPath" alt="@Model[1].Title"></a>
+            <div class="carousel-caption">
+                <h3>@Model[1].Tagline</h3>
+            </div>
+        </div>
+        <div class="item">
+            <a href="@Url.Action("Details", "Movies", new { id = Model[2].MovieId})"><img src="@Model[2].BackdropPath" alt="@Model[1].Title"></a>
+            <div class="carousel-caption">
+                <h3>@Model[2].Tagline</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-three-popular" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-three-popular" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div> <!-- Carousel -->

@@ -1,0 +1,19 @@
+﻿<div class="row">
+    <div class="col-lg-3">
+        <div class="input-group">
+            <input type="text" class="form-control" id="title" placeholder="Movie Title">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="btnApiSearch">Search!</button>
+            </span>
+        </div>
+    </div>
+    <div class="dropdown" hidden>
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            See the Results
+            <span class="caret"></span>
+        </button>
+        <ul id="resultTitles" class="dropdown-menu" aria-labelledby="dropdownMenu1"></ul>
+    </div>
+</div>
+
+<script src="~/Scripts/TmdbApiSearch.js"></script>

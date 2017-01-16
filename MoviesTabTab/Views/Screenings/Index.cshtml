@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MoviesTabTab.Models.Screening>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hall.HallName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Movie.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableSeats)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hall.HallName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Movie.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShowTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableSeats)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ScreeningId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ScreeningId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ScreeningId })
+        </td>
+    </tr>
+}
+
+</table>

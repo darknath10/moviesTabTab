@@ -1,0 +1,136 @@
+﻿@model MoviesTabTab.Models.Movie
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TmdbMovieId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TmdbMovieId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginalTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OriginalTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Runtime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Runtime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tagline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tagline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Synopsis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Synopsis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Director)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Director)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VoteCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VoteCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Popularity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Popularity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PosterUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PosterUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackdropPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackdropPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrailerUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrailerUrl)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

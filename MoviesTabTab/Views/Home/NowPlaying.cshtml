@@ -1,0 +1,15 @@
+﻿@model List<MoviesTabTab.Models.Movie>
+
+@{
+    ViewBag.Title = "Now Playing";
+}
+
+<h2 style="text-align:center">Now Playing</h2>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        @Html.Partial("_Movie", item)
+    </div>
+    <br />
+}

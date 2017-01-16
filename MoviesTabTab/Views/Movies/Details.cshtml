@@ -1,0 +1,85 @@
+﻿@model MoviesTabTab.Models.Movie
+
+<style>
+    .jumbotron {
+    position: relative;
+    background: #000 url("@Model.BackdropPath") center center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+}
+</style>
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-5">
+            <h1><strong>@Model.Title</strong></h1>
+            
+        </div>
+        <div class="col-md-3">
+            <h2><span class="glyphicon glyphicon-star" style="color:gold"></span>@Model.Score<small>/10 (@Model.VoteCount votes)</small></h2>
+        </div>
+        <div class="col-md-4">
+            <br />
+            <span class="rating" id="@Model.Title.Replace(' ', '_').Replace(':','_').Insert(0, "UserRating")"></span>
+        </div>
+    </div>    
+</div>
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Directed by @Model.Director.</h4>
+            <h4>@Model.Runtime mins - Released on @Model.ReleaseDate.ToShortDateString()</h4>
+            <p>@Model.Synopsis</p>
+        </div>
+    </div>
+    <br />
+    
+</div>
+<div class="row" style="float:right">
+    <button class="btn btn-success btn-lg bottom" data-toggle="modal" data-target="#@Model.Title.Replace(' ', '_').Replace(':','_').Insert(0,"TrailerModal")" data-theVideo="@Model.TrailerUrl"><span class="glyphicon glyphicon-film"></span> Watch Trailer!</button>
+    @if (Model.Screenings.Where(a => a.ShowTime > DateTime.Now).Count() != 0)
+            {
+        @Html.ActionLink("Book Now!", "Booking", "Bookings", new { movieId = Model.MovieId }, new { @class = "btn btn-primary btn-lg bottom" })
+    }
+    <a href="@Url.Action("NowPlaying", "Home")" role="button" class="btn btn-info btn-lg bottom">Back to Catalog</a>
+</div>
+
+@*Movie Trailer Modal*@
+<div class="modal fade" id="@Model.Title.Replace(' ', '_').Replace(':','_').Insert(0,"TrailerModal")" tabindex="-1" role="dialog" aria-labelledby="@Model.Title.Replace(' ', '_').Replace(':','_').Insert(0,"TrailerModal")-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="@Model.Title.Replace(' ', '_').Replace(':','_').Insert(0,"TrailerModal")-label">@Model.Title - Trailer</h4>
+            </div>
+            <div class="modal-body">
+                <iframe width="560" height="315" src="" allowfullscreen></iframe>
+            </div>
+            <div class="modal-footer">
+                @Html.ActionLink("Book Now!", "Booking", "Bookings", new { movieId = Model.MovieId }, new { @class = "btn btn-primary btn-lg bottom" })
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @if (User.IsInRole("admin"))
+    {
+        @Html.ActionLink("Edit this Title", "Edit", new { id = Model.MovieId }, new { @class = "btn btn-warning btn-lg bottom" })
+    }    
+</p>
+
+<script src="~/Scripts/PlayYoutubeEmbedContent.js"></script>
+
+<script>
+    $.ajax({
+        url: '@Url.Action("Rating", "Rating", new { movieId = Model.MovieId})',
+        method: "GET",
+        datatype: "html"
+    }).success(function (response) {
+        $('#@Model.Title.Replace(' ', '_').Replace(':', '_').Insert(0, "UserRating")').html(response);
+    });
+</script>

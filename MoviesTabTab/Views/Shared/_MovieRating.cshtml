@@ -1,0 +1,57 @@
+﻿@model MoviesTabTab.Models.Movie
+
+<style>
+    .rating span {
+        font-size: 25px;
+        color: #a6ff4d;
+        cursor: pointer;
+        float: right;
+    }
+
+        .rating span:hover, .rating span:hover ~ span {
+            color: #ffcc00;
+        }
+</style>
+
+<div class="rating" id="@Model.Title.Replace(' ', '_').Insert(0, "Rating")">
+    <span id="10" class="glyphicon glyphicon-star"></span>
+    <span id="9" class="glyphicon glyphicon-star"></span>
+    <span id="8" class="glyphicon glyphicon-star"></span>
+    <span id="7" class="glyphicon glyphicon-star"></span>
+    <span id="6" class="glyphicon glyphicon-star"></span>
+    <span id="5" class="glyphicon glyphicon-star"></span>
+    <span id="4" class="glyphicon glyphicon-star"></span>
+    <span id="3" class="glyphicon glyphicon-star"></span>
+    <span id="2" class="glyphicon glyphicon-star"></span>
+    <span id="1" class="glyphicon glyphicon-star"></span>
+</div>
+
+<script>
+    $('#@Model.Title.Replace(' ', '_').Insert(0, "Rating") span').click(function () {
+        //alert($(this).attr('id'));
+
+        var score = $(this).attr('id');
+
+        $.ajax('http://api.themoviedb.org/3/authentication/guest_session/new?api_key=d1dd5a7fd77c933e088112709eb711e7', {
+            method: "GET",
+            headers: { 'Accept': 'application/json' },
+        }).success(function (apiResponse) {
+            $.ajax('http://api.themoviedb.org/3/movie/' + @Model.TmdbMovieId +'/rating?api_key=d1dd5a7fd77c933e088112709eb711e7&guest_session_id=' + apiResponse.guest_session_id, {
+                method: "POST",
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                data: JSON.stringify({ 'value': score })
+            }).success(function (data) {
+                //console.log('lets see:', JSON.stringify(data));
+                //alert("Thanks mate!");
+                $.ajax({
+                    url: '@Url.Action("NewRating", "Rating", new { movieId = Model.MovieId})' + '&rate=' + score,
+                    method: "POST",
+                    datatype: "html"
+                }).success(function (response) {
+                    //alert("Yeaaaaahhhhhh");
+                    $('#@Model.Title.Replace(' ', '_').Insert(0, "Rating")').html(response);
+                });
+            });
+        });
+    });
+</script>

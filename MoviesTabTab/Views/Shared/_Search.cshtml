@@ -1,0 +1,47 @@
+﻿<div class="navbar navbar-inverse" style="background-color:darkgreen">
+    <form class="navbar-form">
+        <div class="form-group" style="text-align:center; display:block">
+            <div class="input-group">
+                <span class="input-group-addon" id="searchIcon"><span class="glyphicon glyphicon-search"></span></span>
+                <input type="text" id="tags" class="form-control" placeholder="Search Movie by Title" aria-describedby="searchIcon" style="width:600px; margin-right:50%">                
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(function () {
+        $('#tags').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("Search", "Search")' + '/?term=' + request.term,
+                    dataType: 'json',
+                    method: 'GET',
+                    success: function (data) {
+                        
+                        //console.log(JSON.stringify(data));
+                        var suggestions = [];
+                        $.each(data, function (i, val) {
+                            suggestions.push({
+                                label: val.Name,
+                                id: val.Id,
+                            });
+                        });
+                        response(suggestions);
+                    }
+                });
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                console.log(ui.item.id);
+                location.href = "/Movies/Details/" + ui.item.id;
+            },
+            open: function () {
+                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            }
+        });
+    });
+</script>
