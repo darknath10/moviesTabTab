@@ -1,4 +1,4 @@
-# moviesTabTab
+# moviesTabTab - Final project - Technion Certified .Net Developer
 Movies-TAB/TAB is an Asp.Net Web Application designed with the MVC design pattern, using
 Visual Studio 2015, Entity Framework and the Code First workflow.
 
